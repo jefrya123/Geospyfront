@@ -107,6 +107,57 @@ st.markdown("""
         border-radius: 4px;
         margin: 1rem 0;
     }
+    .ranking-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    .ranking-card:hover {
+        border-color: #667eea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .ranking-number {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-right: 1rem;
+    }
+    .ranking-1 { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #333; }
+    .ranking-2 { background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%); color: #333; }
+    .ranking-3 { background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%); color: white; }
+    .location-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .location-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+    }
+    .location-subtitle {
+        color: #666;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+    .comparison-table {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -139,6 +190,15 @@ def create_interactive_map(locations):
         name='Satellite View'
     ).add_to(m)
     
+    # Define colors and icons for rankings
+    ranking_colors = {
+        1: ("gold", "star"),
+        2: ("silver", "star"),
+        3: ("orange", "star"),
+        4: ("blue", "info-circle"),
+        5: ("gray", "info-circle")
+    }
+    
     # Add location markers
     for i, location in enumerate(locations):
         coords = location.get("coordinates", {})
@@ -146,34 +206,28 @@ def create_interactive_map(locations):
         lng = coords.get("longitude", 0)
         
         if lat != 0 and lng != 0:
-            # Determine marker color based on confidence
-            confidence = location.get("confidence", "Medium")
-            if confidence == "High":
-                color = "green"
-                icon = "check-circle"
-            elif confidence == "Medium":
-                color = "orange"
-                icon = "info-circle"
-            else:
-                color = "red"
-                icon = "question-circle"
+            # Get ranking color and icon
+            rank = i + 1
+            color, icon = ranking_colors.get(rank, ("blue", "info-circle"))
             
             # Create popup content
             popup_content = f"""
-            <div style="width: 250px;">
-                <h4>📍 Location {i+1}</h4>
-                <p><strong>City:</strong> {location.get('city', 'Unknown')}</p>
-                <p><strong>State:</strong> {location.get('state', 'Unknown')}</p>
-                <p><strong>Country:</strong> {location.get('country', 'Unknown')}</p>
-                <p><strong>Confidence:</strong> {confidence}</p>
-                <p><strong>Coordinates:</strong> {lat:.6f}, {lng:.6f}</p>
+            <div style="width: 280px;">
+                <h4>🏆 Rank #{rank}: {location.get('city', 'Unknown')}</h4>
+                <p><strong>📍 Location:</strong> {location.get('city', 'Unknown')}, {location.get('state', 'Unknown')}</p>
+                <p><strong>🌍 Country:</strong> {location.get('country', 'Unknown')}</p>
+                <p><strong>🎯 Confidence:</strong> {location.get('confidence', 'Medium')}</p>
+                <p><strong>📊 Coordinates:</strong> {lat:.6f}, {lng:.6f}</p>
+                <hr>
+                <p><strong>💡 Reasoning:</strong></p>
+                <p style="font-size: 0.9em;">{location.get('explanation', 'No explanation provided')[:200]}...</p>
             </div>
             """
             
             folium.Marker(
                 [lat, lng],
                 popup=folium.Popup(popup_content, max_width=300),
-                tooltip=f"{location.get('city', 'Unknown')}, {location.get('country', 'Unknown')}",
+                tooltip=f"#{rank}: {location.get('city', 'Unknown')}, {location.get('country', 'Unknown')}",
                 icon=folium.Icon(color=color, icon=icon, prefix='fa')
             ).add_to(m)
     
@@ -232,10 +286,72 @@ def create_confidence_chart(locations):
     
     return fig
 
+def create_ranking_comparison(locations):
+    """Create a comparison table of all locations"""
+    if not locations:
+        return None
+    
+    # Prepare data for comparison
+    comparison_data = []
+    for i, location in enumerate(locations):
+        coords = location.get("coordinates", {})
+        comparison_data.append({
+            "Rank": f"#{i+1}",
+            "City": location.get("city", "Unknown"),
+            "State/Region": location.get("state", "Unknown"),
+            "Country": location.get("country", "Unknown"),
+            "Confidence": location.get("confidence", "Medium"),
+            "Latitude": f"{coords.get('latitude', 0):.4f}",
+            "Longitude": f"{coords.get('longitude', 0):.4f}"
+        })
+    
+    df = pd.DataFrame(comparison_data)
+    return df
+
+def display_location_ranking(locations):
+    """Display locations in a ranking format"""
+    if not locations:
+        return
+    
+    st.markdown('<h3 class="section-header">🏆 Location Rankings</h3>', unsafe_allow_html=True)
+    
+    for i, location in enumerate(locations):
+        rank = i + 1
+        confidence = location.get("confidence", "Medium")
+        
+        # Determine confidence styling
+        if confidence == "High":
+            conf_class = "confidence-high"
+        elif confidence == "Medium":
+            conf_class = "confidence-medium"
+        else:
+            conf_class = "confidence-low"
+        
+        # Create ranking card
+        st.markdown(f"""
+        <div class="ranking-card">
+            <div class="location-header">
+                <div class="ranking-number ranking-{min(rank, 3)}">{rank}</div>
+                <div>
+                    <h4 class="location-title">{location.get('city', 'Unknown')}, {location.get('country', 'Unknown')}</h4>
+                    <p class="location-subtitle">{location.get('state', 'Unknown')}</p>
+                </div>
+            </div>
+            <div style="margin-left: 3.5rem;">
+                <p><strong>🎯 Confidence:</strong> <span class="{conf_class}">{confidence}</span></p>
+                <p><strong>📍 Coordinates:</strong> {location.get('coordinates', {}).get('latitude', 0):.6f}, {location.get('coordinates', {}).get('longitude', 0):.6f}</p>
+                <details>
+                    <summary><strong>💡 Reasoning</strong></summary>
+                    <p style="margin-top: 0.5rem; color: #666;">{location.get('explanation', 'No explanation provided')}</p>
+                </details>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
 def main():
     # Header
     st.markdown('<h1 class="main-header">🌍 GeoSpy</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with Interactive Maps</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with Multiple Location Predictions</p>', unsafe_allow_html=True)
     
     # Sidebar for configuration
     with st.sidebar:
@@ -287,14 +403,15 @@ def main():
         - 🏛️ Architectural analysis
         - 🌿 Environmental indicators  
         - 🚗 Cultural context
-        - 📍 Coordinate estimation
+        - 📍 Multiple location predictions
         - 🗺️ Interactive maps
         - 📊 Confidence analytics
+        - 🏆 Location rankings
         
         **How it works:**
         1. Upload an image
         2. AI analyzes visual elements
-        3. Get location predictions with confidence levels
+        3. Get top 3-5 location predictions with confidence levels
         """)
     
     # Main content area
@@ -384,18 +501,20 @@ def main():
                 
                 # Display locations
                 if "locations" in result and result["locations"]:
+                    locations = result["locations"]
+                    
                     # Create metrics row
                     col_a, col_b, col_c = st.columns(3)
                     with col_a:
                         st.markdown(f"""
                         <div class="metric-card">
-                            <div class="metric-value">{len(result['locations'])}</div>
-                            <div class="metric-label">Locations Found</div>
+                            <div class="metric-value">{len(locations)}</div>
+                            <div class="metric-label">Predictions</div>
                         </div>
                         """, unsafe_allow_html=True)
                     
                     with col_b:
-                        high_conf = sum(1 for loc in result['locations'] if loc.get('confidence') == 'High')
+                        high_conf = sum(1 for loc in locations if loc.get('confidence') == 'High')
                         st.markdown(f"""
                         <div class="metric-card">
                             <div class="metric-value">{high_conf}</div>
@@ -404,7 +523,7 @@ def main():
                         """, unsafe_allow_html=True)
                     
                     with col_c:
-                        avg_lat = np.mean([loc.get("coordinates", {}).get("latitude", 0) for loc in result["locations"] if loc.get("coordinates", {}).get("latitude", 0) != 0])
+                        avg_lat = np.mean([loc.get("coordinates", {}).get("latitude", 0) for loc in locations if loc.get("coordinates", {}).get("latitude", 0) != 0])
                         st.markdown(f"""
                         <div class="metric-card">
                             <div class="metric-value">{avg_lat:.2f}°</div>
@@ -412,65 +531,38 @@ def main():
                         </div>
                         """, unsafe_allow_html=True)
                     
+                    # Display location rankings
+                    display_location_ranking(locations)
+                    
                     # Interactive Map
                     st.markdown('<h3 class="section-header">🗺️ Interactive Map</h3>', unsafe_allow_html=True)
-                    map_obj = create_interactive_map(result["locations"])
+                    map_obj = create_interactive_map(locations)
                     if map_obj:
                         st_folium(map_obj, width=700, height=500)
                     else:
                         st.warning("⚠️ No valid coordinates found for mapping")
                     
+                    # Location Comparison Table
+                    st.markdown('<h3 class="section-header">📊 Location Comparison</h3>', unsafe_allow_html=True)
+                    comparison_df = create_ranking_comparison(locations)
+                    if comparison_df is not None:
+                        st.dataframe(comparison_df, use_container_width=True, hide_index=True)
+                    
                     # Analytics Charts
-                    st.markdown('<h3 class="section-header">📊 Analytics</h3>', unsafe_allow_html=True)
+                    st.markdown('<h3 class="section-header">📈 Analytics</h3>', unsafe_allow_html=True)
                     
                     col_chart1, col_chart2 = st.columns(2)
                     
                     with col_chart1:
-                        conf_chart = create_confidence_chart(result["locations"])
+                        conf_chart = create_confidence_chart(locations)
                         if conf_chart:
                             st.plotly_chart(conf_chart, use_container_width=True)
                     
-                    # Detailed location information
-                    st.markdown('<h3 class="section-header">📍 Location Details</h3>', unsafe_allow_html=True)
-                    for i, location in enumerate(result["locations"]):
-                        with st.expander(f"Location {i+1}: {location.get('city', 'Unknown')}, {location.get('country', 'Unknown')}", expanded=i==0):
-                            col_a, col_b = st.columns(2)
-                            with col_a:
-                                st.metric("City", location.get("city", "Unknown"))
-                                st.metric("State/Region", location.get("state", "Unknown"))
-                            with col_b:
-                                st.metric("Country", location.get("country", "Unknown"))
-                                
-                                # Confidence with color coding
-                                confidence = location.get("confidence", "Medium")
-                                if confidence == "High":
-                                    st.markdown(f'<p class="confidence-high">Confidence: {confidence}</p>', unsafe_allow_html=True)
-                                elif confidence == "Medium":
-                                    st.markdown(f'<p class="confidence-medium">Confidence: {confidence}</p>', unsafe_allow_html=True)
-                                else:
-                                    st.markdown(f'<p class="confidence-low">Confidence: {confidence}</p>', unsafe_allow_html=True)
-                            
-                            # Coordinates and map link
-                            if "coordinates" in location:
-                                coords = location["coordinates"]
-                                lat = coords.get("latitude", 0)
-                                lng = coords.get("longitude", 0)
-                                
-                                if lat != 0 and lng != 0:
-                                    st.markdown(f"**Coordinates:** {lat:.6f}, {lng:.6f}")
-                                    maps_url = f"https://www.google.com/maps?q={lat},{lng}"
-                                    st.markdown(f"[🗺️ View on Google Maps]({maps_url})")
-                            
-                            # Explanation
-                            if "explanation" in location:
-                                st.markdown("**Reasoning:**")
-                                st.markdown(location["explanation"])
+                    # Analysis timestamp
+                    if 'analysis_time' in st.session_state:
+                        st.caption(f"Analysis completed at: {st.session_state.analysis_time.strftime('%Y-%m-%d %H:%M:%S')}")
                 else:
                     st.warning("⚠️ No locations identified in the analysis")
-                
-                # Analysis timestamp
-                if 'analysis_time' in st.session_state:
-                    st.caption(f"Analysis completed at: {st.session_state.analysis_time.strftime('%Y-%m-%d %H:%M:%S')}")
 
 if __name__ == "__main__":
     main() 

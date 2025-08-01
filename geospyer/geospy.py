@@ -131,9 +131,10 @@ IMPORTANT:
 1. Your response MUST be a valid JSON object. Do not include any text before or after the JSON object.
 2. Do not include any markdown formatting or code blocks.
 3. The response should be parseable by JSON.parse().
-4. You can provide up to three possible locations if you are not completely confident about a single location.
-5. Order the locations by confidence level (highest to lowest).
+4. Provide 3-5 possible locations, ordered by confidence level (highest to lowest).
+5. If you're very confident about one location, still provide 2-3 alternatives with lower confidence.
 6. ALWAYS include approximate coordinates (latitude and longitude) for each location when possible.
+7. Each location should have a unique combination of city/state/country.
 
 Consider these key aspects for accurate location identification:
 1. Architectural Analysis:
@@ -159,7 +160,13 @@ Consider these key aspects for accurate location identification:
    - Architectural period
    - Vehicle models
    - Fashion styles
-   - Technology visible"""
+   - Technology visible
+
+5. Regional Variations:
+   - Consider similar architectural styles across different regions
+   - Look for subtle cultural differences
+   - Consider climate variations within countries
+   - Account for historical influences and colonial architecture"""
 
         # Add additional context if provided
         if context_info:
