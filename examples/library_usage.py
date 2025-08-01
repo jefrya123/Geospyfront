@@ -7,9 +7,14 @@ from geospyer import GeoSpy
 import os 
 import pathlib
 import json
+from dotenv import load_dotenv
 
-# Initialize GeoSpy
-geospy = GeoSpy(api_key="your_api_key_here")
+# Load environment variables from .env file
+load_dotenv()
+
+# Initialize GeoSpy with API key from environment variable
+# You can also pass the API key directly: GeoSpy(api_key="your_api_key_here")
+geospy = GeoSpy()  # Will automatically use GEMINI_API_KEY from environment
 
 # Analyze a local image
 image_path = os.path.join(pathlib.Path(__file__).parent.parent, "kule.jpg")
