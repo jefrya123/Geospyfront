@@ -29,9 +29,6 @@
 git clone https://github.com/jefrya123/Geospyfront.git
 cd Geospyfront
 
-# Set your API key
-export GEMINI_API_KEY="your_api_key_here"
-
 # Start the application
 docker-compose up --build
 
@@ -52,9 +49,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Set API key
-export GEMINI_API_KEY="your_api_key_here"
-
 # Run the app
 streamlit run streamlit_app_clean.py
 ```
@@ -66,12 +60,13 @@ streamlit run streamlit_app_clean.py
    - Create a new API key (free tier available)
    - Copy the key to your clipboard
 
-2. **Set Environment Variable:**
-   ```bash
-   export GEMINI_API_KEY="your_actual_api_key_here"
-   ```
+2. **Enter API Key in App:**
+   - Start the application (Docker or local)
+   - Open the sidebar configuration panel
+   - Enter your API key in the "Gemini API Key" field
+   - The key is securely stored in your session
 
-> **⚠️ Security Note**: Each user needs their own API key. Never share your API key publicly or commit it to version control.
+> **⚠️ Security Note**: Each user needs their own API key. The API key is stored securely in your browser session and is never saved to disk or shared.
 
 ## 📸 Screenshots
 
@@ -131,11 +126,14 @@ streamlit run streamlit_app_clean.py
 
 ## ⚙️ Configuration
 
-### Environment Variables
+### API Key Setup
 
-| Variable | Description | Required | Default |
-|----------|-------------|----------|---------|
-| `GEMINI_API_KEY` | Your Gemini API key | Yes | None |
+The application uses a secure sidebar interface for API key entry:
+
+1. **Start the application** (Docker or local)
+2. **Open the sidebar** (⚙️ Configuration panel)
+3. **Enter your Gemini API key** in the password field
+4. **The key is stored securely** in your browser session
 
 ### Docker Configuration
 
@@ -190,11 +188,13 @@ ports:
 
 **API Key Problems:**
 ```bash
-# Check if API key is set
-echo $GEMINI_API_KEY
+# The API key is entered in the Streamlit sidebar
+# No environment variable setup required
 
-# Set API key if missing
-export GEMINI_API_KEY="your_key_here"
+# If you see "API key required" error:
+# 1. Check the sidebar configuration panel
+# 2. Enter your Gemini API key in the password field
+# 3. Make sure the key is valid and active
 ```
 
 **Port Already in Use:**
@@ -222,7 +222,7 @@ docker-compose up --build
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| "API key required" | Missing API key | Set `GEMINI_API_KEY` environment variable |
+| "API key required" | Missing API key | Enter API key in sidebar configuration |
 | "API overloaded" | High traffic | Wait and retry, or try later |
 | "Rate limit exceeded" | Too many requests | Wait for rate limit reset |
 | "Invalid API key" | Wrong key | Check and regenerate API key |
