@@ -29,27 +29,58 @@ st.set_page_config(
 # Custom CSS for professional styling
 st.markdown("""
 <style>
-    /* Global text color override */
+    /* Dark theme optimization */
+    .stApp {
+        background-color: #0e1117;
+    }
+    
+    /* Global text color for dark theme */
     .stMarkdown, .stText, .stTextInput, .stTextArea, .stSelectbox, .stSlider {
-        color: #333 !important;
+        color: #fafafa !important;
     }
     
-    /* Ensure all text elements have proper contrast */
+    /* Ensure all text elements have proper contrast on dark theme */
     p, h1, h2, h3, h4, h5, h6, span, div, label {
-        color: #333 !important;
+        color: #fafafa !important;
     }
     
-    /* Streamlit specific overrides */
+    /* Streamlit specific overrides for dark theme */
     .stMarkdown p {
-        color: #333 !important;
+        color: #fafafa !important;
     }
     
     .stTextInput > div > div > input {
-        color: #333 !important;
+        color: #fafafa !important;
+        background-color: #262730 !important;
+        border-color: #4a4a4a !important;
     }
     
     .stTextArea > div > div > textarea {
-        color: #333 !important;
+        color: #fafafa !important;
+        background-color: #262730 !important;
+        border-color: #4a4a4a !important;
+    }
+    
+    /* Sidebar styling for dark theme */
+    .css-1d391kg {
+        background-color: #1f1f1f !important;
+    }
+    
+    /* Reduce excessive padding and margins */
+    .main .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        max-width: 1200px !important;
+    }
+    
+    /* Compact spacing */
+    .stMarkdown {
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Reduce blank space */
+    .stButton > button {
+        margin: 0.5rem 0 !important;
     }
     
     .main-header {
@@ -65,7 +96,7 @@ st.markdown("""
     .subtitle {
         text-align: center;
         font-size: 1.1rem;
-        color: #666 !important;
+        color: #b0b0b0 !important;
         margin-bottom: 2rem;
     }
     .metric-card {
@@ -109,35 +140,36 @@ st.markdown("""
         border-radius: 4px;
     }
     .upload-area {
-        border: 2px dashed #ddd;
+        border: 2px dashed #4a4a4a;
         border-radius: 10px;
         padding: 2rem;
         text-align: center;
-        background: #f8f9fa;
+        background: #262730;
         transition: all 0.3s ease;
-        color: #333 !important;
+        color: #fafafa !important;
     }
+    
     .upload-area:hover {
-        border-color: #667eea;
-        background: #f0f2ff;
+        border-color: #1f77b4;
+        background: #2a2a3a;
     }
     .section-header {
         font-size: 1.5rem;
         font-weight: bold;
         margin: 1.5rem 0 1rem 0;
-        color: #333 !important;
+        color: #fafafa !important;
     }
     .info-box {
-        background: #e3f2fd;
-        border-left: 4px solid #2196f3;
+        background: #1a1a2e;
+        border-left: 4px solid #1f77b4;
         padding: 1rem;
         border-radius: 4px;
         margin: 1rem 0;
-        color: #333 !important;
+        color: #fafafa !important;
     }
     .ranking-card {
-        background: white;
-        border: 2px solid #e0e0e0;
+        background: #262730;
+        border: 2px solid #4a4a4a;
         border-radius: 12px;
         padding: 1.5rem;
         margin: 1rem 0;

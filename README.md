@@ -76,13 +76,19 @@ streamlit run streamlit_app_clean.py
 ## 📸 Screenshots
 
 <div align="center">
+  <img src="docs/screenshots/main-interface.png" alt="Main Interface - Dark themed interface with sidebar configuration and image upload area" width="400"/>
+  <img src="docs/screenshots/location-details.png" alt="Location Details - Ranked predictions with confidence levels" width="400"/>
+  <img src="docs/screenshots/results-analysis.png" alt="Results Analysis - Analytics dashboard with comparison table" width="400"/>
   <img src="docs/screenshots/api-key-setup.png" alt="API Key Setup" width="400"/>
-  <img src="docs/screenshots/main-interface.png" alt="Main Interface" width="400"/>
-  <img src="docs/screenshots/results-analysis.png" alt="Results Analysis" width="400"/>
   <img src="docs/screenshots/map-analytics.png" alt="Interactive Map & Analytics" width="400"/>
-  <img src="docs/screenshots/location-details.png" alt="Location Details" width="400"/>
   <img src="docs/screenshots/docker-setup.png" alt="Docker Setup" width="400"/>
 </div>
+
+### Key Features Shown:
+- **Main Interface**: Professional dark theme with sidebar configuration and main content area
+- **Location Analysis**: 3-5 ranked predictions with confidence levels (High/Medium/Low)
+- **Analytics Dashboard**: Detailed comparison table with coordinates and confidence distribution
+- **Real Results**: Example analysis showing Greensboro, Macon, and Lexington predictions
 
 ## 🏗️ Architecture
 
