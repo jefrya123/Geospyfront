@@ -1,3 +1,23 @@
+"""
+GeoSpy Streamlit Web Application
+
+A professional web interface for AI-powered image geolocation using Google's Gemini AI.
+This application provides a user-friendly way to upload images and get top 3 location
+predictions with detailed AI reasoning and interactive visualizations.
+
+Features:
+- Dark theme UI with professional styling
+- Image upload via file or URL
+- Top 3 location predictions with AI reasoning
+- Interactive maps with location markers
+- Analytics dashboard with confidence distribution
+- Graceful error handling for API overloads
+- Responsive design with sidebar configuration
+
+Author: Enhanced version of original GeoSpy by Atilla
+License: MIT
+"""
+
 import streamlit as st
 import os
 from pathlib import Path
@@ -15,10 +35,10 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-# Load environment variables
+# Load environment variables from .env file
 load_dotenv()
 
-# Page configuration
+# Configure Streamlit page settings
 st.set_page_config(
     page_title="GeoSpy - AI Image Geolocation",
     page_icon="🌍",
@@ -415,7 +435,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def create_interactive_map(locations):
-    """Create an interactive map with location markers and heatmap"""
+    """
+    Create an interactive Folium map with location markers and heatmap visualization.
+    
+    Args:
+        locations (list): List of location dictionaries containing coordinates and metadata
+        
+    Returns:
+        folium.Map or None: Interactive map object if locations exist, None otherwise
+        
+    Features:
+        - Satellite and street view layers
+        - Ranked location markers with popups
+        - Heatmap visualization for multiple locations
+        - Custom styling for different ranking levels
+    """
     if not locations:
         return None
     
@@ -506,7 +540,20 @@ def create_interactive_map(locations):
     return m
 
 def create_confidence_chart(locations):
-    """Create a confidence distribution chart"""
+    """
+    Create a Plotly bar chart showing the distribution of confidence levels.
+    
+    Args:
+        locations (list): List of location dictionaries with confidence levels
+        
+    Returns:
+        plotly.graph_objects.Figure or None: Bar chart figure if locations exist, None otherwise
+        
+    Features:
+        - Color-coded confidence levels (High=Green, Medium=Yellow, Low=Red)
+        - Responsive design with dark theme styling
+        - Clear labels and title
+    """
     if not locations:
         return None
     
@@ -540,7 +587,20 @@ def create_confidence_chart(locations):
     return fig
 
 def create_ranking_comparison(locations):
-    """Create a comparison table of all locations"""
+    """
+    Create a pandas DataFrame for location comparison table.
+    
+    Args:
+        locations (list): List of location dictionaries with metadata
+        
+    Returns:
+        pandas.DataFrame or None: Comparison table if locations exist, None otherwise
+        
+    Features:
+        - Ranked locations with city, state, country
+        - Confidence levels and coordinates
+        - Formatted for easy reading in Streamlit
+    """
     if not locations:
         return None
     
@@ -562,7 +622,19 @@ def create_ranking_comparison(locations):
     return df
 
 def display_location_ranking(locations):
-    """Display top 3 locations in a ranking format without confidence levels"""
+    """
+    Display the top 3 location predictions in a ranked card format.
+    
+    Args:
+        locations (list): List of location dictionaries with metadata and AI reasoning
+        
+    Features:
+        - Gold/Silver/Bronze ranking styling
+        - City, state, and country information
+        - Precise coordinates display
+        - Expandable AI reasoning sections
+        - Professional card-based layout
+    """
     if not locations:
         return
     
@@ -595,7 +667,25 @@ def display_location_ranking(locations):
         """, unsafe_allow_html=True)
 
 def main():
-    # Header
+    """
+    Main Streamlit application entry point.
+    
+    This function orchestrates the entire GeoSpy web application, including:
+    - User interface setup with dark theme styling
+    - Sidebar configuration for API key and context
+    - Image upload handling (file or URL)
+    - AI analysis processing with error handling
+    - Results display with interactive visualizations
+    
+    Features:
+        - Professional dark theme UI
+        - Secure API key input
+        - Multiple image upload methods
+        - Comprehensive error handling
+        - Interactive maps and analytics
+        - Top 3 location predictions with AI reasoning
+    """
+    # Application header and branding
     st.markdown('<h1 class="main-header">🌍 GeoSpy</h1>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">AI-Powered Image Geolocation with **Top 3 Location Predictions**</p>', unsafe_allow_html=True)
     
