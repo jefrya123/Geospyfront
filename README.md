@@ -4,258 +4,294 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-red.svg)](https://streamlit.io/)
 [![Python](https://img.shields.io/badge/Python-3.11+-green.svg)](https://python.org/)
 
-**GeoSpy** is an advanced AI-powered image geolocation tool that uses Google's Gemini AI to analyze images and identify their geographical location with interactive maps and detailed analytics.
-
 > **Note**: This is an enhanced version of the original [GeoSpy](https://github.com/atiilla/geospy) project by [Atilla](https://github.com/atiilla), featuring a professional Streamlit web interface, Docker containerization, and improved user experience.
+
+**GeoSpy** is an advanced AI-powered image geolocation tool that analyzes photographs to identify their geographical location. Using Google's Gemini AI, it examines architectural styles, environmental indicators, cultural context, and visual landmarks to provide multiple location predictions with confidence levels.
 
 ## ✨ Features
 
-- 🏛️ **Architectural Analysis** - Identifies building styles and landmarks
-- 🌿 **Environmental Indicators** - Analyzes climate, vegetation, and terrain
-- 🚗 **Cultural Context** - Recognizes language, vehicles, and cultural elements
-- 📍 **Coordinate Estimation** - Provides precise latitude/longitude coordinates
-- 🗺️ **Interactive Maps** - Satellite view with color-coded confidence markers
-- 🔥 **Heatmap Visualization** - Shows multiple location predictions
-- 📊 **Analytics Dashboard** - Confidence charts and detailed metrics
-- 🎨 **Professional UI** - Clean, modern interface with responsive design
+- 🏛️ **Architectural Analysis** - Identifies building styles, materials, and design patterns
+- 🌿 **Environmental Indicators** - Analyzes vegetation, climate, and natural features
+- 🚗 **Cultural Context** - Recognizes signs, vehicles, and cultural elements
+- 📍 **Multiple Predictions** - Provides 3-5 ranked location options with confidence levels
+- 🗺️ **Interactive Maps** - Visualizes predictions with satellite and street views
+- 📊 **Confidence Analytics** - Detailed confidence scoring and feature analysis
+- 🏆 **Location Rankings** - Gold, silver, bronze ranking system for predictions
+- 🔄 **Automatic Retry** - Handles API overload and temporary failures gracefully
+- 🛡️ **Error Recovery** - Comprehensive error handling with user guidance
 
 ## 🚀 Quick Start
 
 ### Option 1: Docker (Recommended)
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/jefrya123/Geospyfront.git
-   cd Geospyfront
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/jefrya123/Geospyfront.git
+cd Geospyfront
 
-2. **Get your API key**
-   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-   - Sign in and create a new API key
-   - Copy the generated key
+# Set your API key
+export GEMINI_API_KEY="your_api_key_here"
 
-3. **Set your API key**
-   ```bash
-   export GEMINI_API_KEY="your_actual_api_key_here"
-   ```
+# Start the application
+docker-compose up --build
 
-4. **Run with Docker Compose**
-   ```bash
-   docker-compose up --build
-   ```
-
-5. **Open your browser**
-   Navigate to `http://localhost:8502`
+# Open your browser to: http://localhost:8502
+```
 
 ### Option 2: Local Development
 
-1. **Clone and setup**
-   ```bash
-   git clone https://github.com/jefrya123/Geospyfront.git
-   cd Geospyfront
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+```bash
+# Clone and setup
+git clone https://github.com/jefrya123/Geospyfront.git
+cd Geospyfront
 
-2. **Set environment variable**
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set API key
+export GEMINI_API_KEY="your_api_key_here"
+
+# Run the app
+streamlit run streamlit_app_clean.py
+```
+
+## 🔑 API Key Setup
+
+1. **Get Your API Key:**
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a new API key (free tier available)
+   - Copy the key to your clipboard
+
+2. **Set Environment Variable:**
    ```bash
    export GEMINI_API_KEY="your_actual_api_key_here"
    ```
-
-3. **Run the app**
-   ```bash
-   streamlit run streamlit_app_clean.py
-   ```
-
-## 🔑 Getting Your API Key
-
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Sign in with your Google account
-3. Click "Create API Key"
-4. Copy the generated key
-5. Set it as an environment variable or enter it in the app
 
 > **⚠️ Security Note**: Each user needs their own API key. Never share your API key publicly or commit it to version control.
 
 ## 📸 Screenshots
 
-### API Key Setup
-![API Key Setup](docs/screenshots/api-key-setup.png)
-*Secure API key entry with clear instructions and validation*
-
-### Docker Setup
-![Docker Setup](docs/screenshots/docker-setup.png)
-*Simple Docker Compose setup with one command*
-
-### Main Interface
-![Main Interface](docs/screenshots/main-interface.png)
-*Clean, professional interface with upload area and results panel*
-
-### Results Analysis
-![Results Analysis](docs/screenshots/results-analysis.png)
-*AI analysis results with uploaded image, interpretation, and metrics*
-
-### Interactive Map & Analytics
-![Interactive Map & Analytics](docs/screenshots/map-analytics.png)
-*Interactive map with location markers and confidence analytics dashboard*
-
-### Location Details
-![Location Details](docs/screenshots/location-details.png)
-*Detailed location information with coordinates and reasoning*
-
-## 🎯 How to Use
-
-### 1. Upload an Image
-- Drag and drop an image file (PNG, JPG, JPEG, GIF, BMP)
-- Or provide a direct image URL
-- Supported file size: Up to 200MB
-
-### 2. Configure Analysis
-- Enter your Gemini API key in the sidebar
-- Add optional context (time of day, weather, landmarks)
-- Provide location hints if you have any
-
-### 3. Analyze Location
-- Click "🔍 Analyze Location" to start AI analysis
-- Wait 5-15 seconds for processing
-- View results on interactive maps and charts
-
-### 4. Explore Results
-- **Interactive Map**: See location markers with confidence levels
-- **Analytics**: View confidence distribution and metrics
-- **Details**: Expand location cards for coordinates and reasoning
-- **Google Maps**: Click links to view locations on Google Maps
+<div align="center">
+  <img src="docs/screenshots/api-key-setup.png" alt="API Key Setup" width="400"/>
+  <img src="docs/screenshots/main-interface.png" alt="Main Interface" width="400"/>
+  <img src="docs/screenshots/results-analysis.png" alt="Results Analysis" width="400"/>
+  <img src="docs/screenshots/map-analytics.png" alt="Interactive Map & Analytics" width="400"/>
+  <img src="docs/screenshots/location-details.png" alt="Location Details" width="400"/>
+  <img src="docs/screenshots/docker-setup.png" alt="Docker Setup" width="400"/>
+</div>
 
 ## 🏗️ Architecture
 
 ```
-geospy/
-├── geospyer/                 # Core GeoSpy library
-│   ├── __init__.py
-│   ├── geospy.py            # Main GeoSpy class
-│   └── cli.py               # Command-line interface
-├── streamlit_app_clean.py   # Main Streamlit application
-├── requirements.txt         # Python dependencies
-├── Dockerfile              # Docker configuration
-├── docker-compose.yml      # Docker Compose setup
-├── examples/               # Usage examples
-│   └── library_usage.py
-└── docs/                   # Documentation
-    └── screenshots/        # Screenshots for README
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Streamlit UI  │───▶│   GeoSpy Core   │───▶│  Gemini API     │
+│                 │    │                 │    │                 │
+│ • File Upload   │    │ • Image Encoding│    │ • AI Analysis   │
+│ • Interactive   │    │ • API Requests  │    │ • Location      │
+│   Maps          │    │ • Error Handling│    │   Prediction    │
+│ • Analytics     │    │ • Retry Logic   │    │ • Confidence    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
 ## 🛠️ Technology Stack
 
+- **Frontend**: Streamlit, HTML/CSS, JavaScript
 - **Backend**: Python 3.11+
-- **AI**: Google Gemini API
-- **Web Framework**: Streamlit
-- **Maps**: Folium with OpenStreetMap
-- **Visualization**: Plotly
-- **Containerization**: Docker & Docker Compose
-- **Image Processing**: Pillow
+- **AI/ML**: Google Gemini API
+- **Maps**: Folium, OpenStreetMap, Esri Satellite
+- **Data Visualization**: Plotly, Pandas, NumPy
+- **Containerization**: Docker, Docker Compose
+- **Image Processing**: Pillow (PIL)
 
-## 📊 How It Works
+## 🔍 How It Works
 
-1. **Image Upload** - User uploads an image or provides a URL
-2. **AI Analysis** - Gemini AI analyzes visual elements:
+1. **Image Upload**: Users upload images or provide URLs
+2. **AI Analysis**: Gemini AI analyzes visual elements:
    - Architectural features and building styles
-   - Environmental indicators (climate, vegetation)
-   - Cultural elements (language, vehicles, signage)
+   - Environmental indicators (vegetation, climate)
+   - Cultural context (signs, vehicles, people)
    - Landmarks and distinctive features
-3. **Location Prediction** - AI provides multiple location predictions with confidence levels
-4. **Visualization** - Results displayed on interactive maps with analytics
+3. **Location Prediction**: AI generates 3-5 possible locations with confidence levels
+4. **Visualization**: Results displayed on interactive maps with analytics
+5. **Ranking**: Locations ranked by confidence (gold, silver, bronze)
 
-## 🔧 Configuration
+## ⚙️ Configuration
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `GEMINI_API_KEY` | Your Gemini API key | ✅ Yes |
+| Variable | Description | Required | Default |
+|----------|-------------|----------|---------|
+| `GEMINI_API_KEY` | Your Gemini API key | Yes | None |
 
 ### Docker Configuration
 
-The app runs on port `8502` by default. You can change this in `docker-compose.yml`:
+The application runs on port 8502 by default. You can modify `docker-compose.yml` to change the port mapping:
 
 ```yaml
 ports:
-  - "8502:8501"  # Change 8502 to your preferred port
+  - "YOUR_PORT:8501"  # Change YOUR_PORT to desired host port
 ```
 
-## 📈 Performance
+## 📊 Performance & Limitations
 
-- **Image Size**: Supports up to 200MB per file
+### ⚡ Performance
+- **Analysis Time**: 5-15 seconds per image
+- **Image Size**: Supports up to 20MB images
 - **Formats**: PNG, JPG, JPEG, GIF, BMP
-- **Response Time**: Typically 5-15 seconds depending on image complexity
-- **Accuracy**: High confidence predictions for distinctive landmarks and locations
+- **Concurrent Users**: Limited by Gemini API rate limits
+
+### 🎯 Accuracy Limitations
+
+**AI Predictions May Be Incorrect:**
+- **Visual Similarity**: AI may confuse similar-looking locations
+- **Generic Landscapes**: Plain landscapes are harder to identify
+- **Indoor Photos**: Limited to architectural and cultural clues
+- **Edited Images**: Filters, crops, or edits can affect accuracy
+- **Historical Changes**: AI may not recognize recent changes to locations
+
+**Common Accuracy Issues:**
+- Similar architectural styles across regions
+- Generic urban environments
+- Rural areas with limited distinctive features
+- Photos with poor lighting or quality
+- Locations with recent development changes
+
+### 🔄 API Reliability
+
+**Free API Constraints:**
+- **Rate Limits**: Limited requests per minute/hour
+- **Quota Limits**: Monthly usage limits apply
+- **Service Availability**: May experience temporary outages
+- **Peak Traffic**: Performance may degrade during high usage
+
+**Error Handling:**
+- **Automatic Retries**: 3 attempts with exponential backoff
+- **503 Errors**: API overload - retry with delays
+- **429 Errors**: Rate limiting - longer delays
+- **Timeout Handling**: 30-second timeout per request
 
 ## 🚨 Troubleshooting
 
 ### Common Issues
 
-1. **Container won't start**
-   ```bash
-   docker-compose logs
-   docker-compose down && docker-compose up --build
-   ```
+**API Key Problems:**
+```bash
+# Check if API key is set
+echo $GEMINI_API_KEY
 
-2. **API key issues**
-   ```bash
-   echo $GEMINI_API_KEY  # Check if set
-   docker-compose down && GEMINI_API_KEY="your_key" docker-compose up -d
-   ```
+# Set API key if missing
+export GEMINI_API_KEY="your_key_here"
+```
 
-3. **Port conflicts**
-   ```bash
-   # Change port in docker-compose.yml
-   ports:
-     - "8503:8501"  # Use different host port
-   ```
+**Port Already in Use:**
+```bash
+# Check what's using port 8502
+lsof -i :8502
 
-4. **Memory issues**
-   ```bash
-   # Increase memory limit
-   docker run --memory=2g -p 8502:8501 geospy
-   ```
+# Kill process or change port in docker-compose.yml
+```
 
-### Getting Help
+**Docker Issues:**
+```bash
+# Clean up Docker
+docker-compose down
+docker system prune -f
+docker-compose up --build
+```
 
-- **Issues**: [GitHub Issues](https://github.com/jefrya123/Geospyfront/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/jefrya123/Geospyfront/discussions)
-- **Email**: jefrya123@gmail.com
+**API Overload (503 Error):**
+- Wait 1-2 minutes and retry
+- Try during off-peak hours
+- Check [Google AI Studio Status](https://status.ai.google.com/)
+
+### Error Messages
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "API key required" | Missing API key | Set `GEMINI_API_KEY` environment variable |
+| "API overloaded" | High traffic | Wait and retry, or try later |
+| "Rate limit exceeded" | Too many requests | Wait for rate limit reset |
+| "Invalid API key" | Wrong key | Check and regenerate API key |
+| "Request timeout" | Network issues | Check internet connection |
+
+## 📖 How to Use
+
+### 1. **Upload Image**
+   - Drag and drop an image file
+   - Or provide a direct image URL
+   - Supported formats: PNG, JPG, JPEG, GIF, BMP
+
+### 2. **Configure Analysis**
+   - Enter your Gemini API key
+   - Add optional context (time, weather, landmarks)
+   - Provide location hints if available
+
+### 3. **Analyze Location**
+   - Click "Analyze Location" button
+   - Wait 5-15 seconds for AI processing
+   - View multiple location predictions
+
+### 4. **Explore Results**
+   - Review ranked location predictions
+   - Examine confidence levels and reasoning
+   - Explore interactive maps
+   - View analytics and comparisons
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
-## 📝 License
+### Development Setup
+
+```bash
+# Fork and clone
+git clone https://github.com/yourusername/Geospyfront.git
+cd Geospyfront
+
+# Install development dependencies
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+
+# Run tests
+pytest
+
+# Start development server
+streamlit run streamlit_app_clean.py
+```
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
 - **Original Project**: This project is based on [GeoSpy](https://github.com/atiilla/geospy) by [Atilla](https://github.com/atiilla)
-- [Google Gemini AI](https://ai.google.dev/) for the AI capabilities
-- [Streamlit](https://streamlit.io/) for the web framework
-- [Folium](https://python-visualization.github.io/folium/) for interactive maps
-- [Plotly](https://plotly.com/) for data visualization
+- **AI Technology**: Powered by Google's Gemini API
+- **Maps**: OpenStreetMap and Esri for satellite imagery
+- **UI Framework**: Streamlit for the web interface
 
-## 🔮 Roadmap
+## 💬 Support
 
-- [ ] Batch processing for multiple images
-- [ ] Historical image analysis
-- [ ] Mobile app version
-- [ ] API endpoint for programmatic access
-- [ ] Integration with other mapping services
-- [ ] Advanced analytics and reporting
+- **Issues**: [GitHub Issues](https://github.com/jefrya123/Geospyfront/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/jefrya123/Geospyfront/discussions)
+- **Email**: jefrya123@gmail.com
+
+## 🗺️ Roadmap
+
+- [ ] **Batch Processing** - Analyze multiple images at once
+- [ ] **Historical Analysis** - Compare with historical location data
+- [ ] **Custom Models** - Train on specific geographic regions
+- [ ] **Mobile App** - Native iOS/Android applications
+- [ ] **API Endpoints** - RESTful API for integration
+- [ ] **Advanced Analytics** - Detailed confidence scoring
+- [ ] **Community Database** - User-contributed location data
 
 ---
 
-**Made with ❤️ by [Jeff](https://github.com/jefrya123)**
+**⭐ Star this repository if you find it helpful!**
 
-*GeoSpy - Discover the world through AI-powered image analysis*
+**🔗 Repository**: [https://github.com/jefrya123/Geospyfront](https://github.com/jefrya123/Geospyfront)

@@ -29,6 +29,29 @@ st.set_page_config(
 # Custom CSS for professional styling
 st.markdown("""
 <style>
+    /* Global text color override */
+    .stMarkdown, .stText, .stTextInput, .stTextArea, .stSelectbox, .stSlider {
+        color: #333 !important;
+    }
+    
+    /* Ensure all text elements have proper contrast */
+    p, h1, h2, h3, h4, h5, h6, span, div, label {
+        color: #333 !important;
+    }
+    
+    /* Streamlit specific overrides */
+    .stMarkdown p {
+        color: #333 !important;
+    }
+    
+    .stTextInput > div > div > input {
+        color: #333 !important;
+    }
+    
+    .stTextArea > div > div > textarea {
+        color: #333 !important;
+    }
+    
     .main-header {
         font-size: 2.5rem;
         font-weight: bold;
@@ -37,16 +60,17 @@ st.markdown("""
         background: linear-gradient(90deg, #1f77b4 0%, #ff7f0e 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        color: #1f77b4 !important; /* Fallback */
     }
     .subtitle {
         text-align: center;
         font-size: 1.1rem;
-        color: #666;
+        color: #666 !important;
         margin-bottom: 2rem;
     }
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: white !important;
         padding: 1.5rem;
         border-radius: 12px;
         text-align: center;
@@ -56,27 +80,29 @@ st.markdown("""
         font-size: 2rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
+        color: white !important;
     }
     .metric-label {
         font-size: 0.9rem;
         opacity: 0.9;
+        color: white !important;
     }
     .confidence-high { 
-        color: #28a745; 
+        color: #28a745 !important; 
         font-weight: bold; 
         background: rgba(40, 167, 69, 0.1);
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
     }
     .confidence-medium { 
-        color: #ffc107; 
+        color: #ffc107 !important; 
         font-weight: bold; 
         background: rgba(255, 193, 7, 0.1);
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
     }
     .confidence-low { 
-        color: #dc3545; 
+        color: #dc3545 !important; 
         font-weight: bold; 
         background: rgba(220, 53, 69, 0.1);
         padding: 0.25rem 0.5rem;
@@ -89,6 +115,7 @@ st.markdown("""
         text-align: center;
         background: #f8f9fa;
         transition: all 0.3s ease;
+        color: #333 !important;
     }
     .upload-area:hover {
         border-color: #667eea;
@@ -98,7 +125,7 @@ st.markdown("""
         font-size: 1.5rem;
         font-weight: bold;
         margin: 1.5rem 0 1rem 0;
-        color: #333;
+        color: #333 !important;
     }
     .info-box {
         background: #e3f2fd;
@@ -106,6 +133,7 @@ st.markdown("""
         padding: 1rem;
         border-radius: 4px;
         margin: 1rem 0;
+        color: #333 !important;
     }
     .ranking-card {
         background: white;
@@ -115,6 +143,7 @@ st.markdown("""
         margin: 1rem 0;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
+        color: #333 !important;
     }
     .ranking-card:hover {
         border-color: #667eea;
@@ -126,16 +155,16 @@ st.markdown("""
         height: 40px;
         border-radius: 50%;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: white !important;
         text-align: center;
         line-height: 40px;
         font-weight: bold;
         font-size: 1.2rem;
         margin-right: 1rem;
     }
-    .ranking-1 { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #333; }
-    .ranking-2 { background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%); color: #333; }
-    .ranking-3 { background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%); color: white; }
+    .ranking-1 { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #333 !important; }
+    .ranking-2 { background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%); color: #333 !important; }
+    .ranking-3 { background: linear-gradient(135deg, #cd7f32 0%, #daa520 100%); color: white !important; }
     .location-header {
         display: flex;
         align-items: center;
@@ -144,11 +173,11 @@ st.markdown("""
     .location-title {
         font-size: 1.3rem;
         font-weight: bold;
-        color: #333;
+        color: #333 !important;
         margin: 0;
     }
     .location-subtitle {
-        color: #666;
+        color: #666 !important;
         font-size: 1rem;
         margin: 0.5rem 0;
     }
@@ -157,6 +186,26 @@ st.markdown("""
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Error message styling */
+    .stAlert {
+        color: #333 !important;
+    }
+    
+    /* Success message styling */
+    .stSuccess {
+        color: #333 !important;
+    }
+    
+    /* Info message styling */
+    .stInfo {
+        color: #333 !important;
+    }
+    
+    /* Warning message styling */
+    .stWarning {
+        color: #333 !important;
     }
 </style>
 """, unsafe_allow_html=True)
