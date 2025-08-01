@@ -2,6 +2,7 @@ import json
 import requests
 import base64
 import os
+import time
 from typing import Dict, Any, Optional, List, Union
 from urllib.parse import urlparse
 
@@ -220,18 +221,66 @@ Consider these key aspects for accurate location identification:
             "Referrer-Policy": "strict-origin-when-cross-origin"
         }
         
+        # Retry logic for temporary failures
+        max_retries = 3
+        base_delay = 2  # seconds
+        
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(
+                    f"{self.gemini_api_url}?key={self.gemini_api_key}",
+                    headers=headers,
+                    json=request_body,
+                    timeout=30  # 30 second timeout
+                )
+                
+                if response.status_code == 200:
+                    break  # Success, exit retry loop
+                elif response.status_code == 503:
+                    # API overloaded, retry with exponential backoff
+                    if attempt < max_retries - 1:
+                        delay = base_delay * (2 ** attempt)  # 2, 4, 8 seconds
+                        print(f"API overloaded (503), retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        return {"error": "API is temporarily overloaded. Please try again in a few minutes.", "details": response.text}
+                elif response.status_code == 429:
+                    # Rate limited, retry with longer delay
+                    if attempt < max_retries - 1:
+                        delay = base_delay * (3 ** attempt)  # 2, 6, 18 seconds
+                        print(f"Rate limited (429), retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        return {"error": "Rate limit exceeded. Please wait a moment and try again.", "details": response.text}
+                else:
+                    # Other HTTP errors
+                    print(f"Error: API request failed with status code {response.status_code}")
+                    print(f"Response: {response.text}")
+                    return {"error": f"Failed to get response from Gemini API (HTTP {response.status_code})", "details": response.text}
+                    
+            except requests.exceptions.Timeout:
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)
+                    print(f"Request timeout, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                    continue
+                else:
+                    return {"error": "Request timed out. Please check your internet connection and try again."}
+            except requests.exceptions.ConnectionError:
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)
+                    print(f"Connection error, retrying in {delay} seconds... (attempt {attempt + 1}/{max_retries})")
+                    time.sleep(delay)
+                    continue
+                else:
+                    return {"error": "Connection failed. Please check your internet connection and try again."}
+            except Exception as e:
+                return {"error": f"Unexpected error during API request: {str(e)}"}
+        
+        # Process successful response
         try:
-            response = requests.post(
-                f"{self.gemini_api_url}?key={self.gemini_api_key}",
-                headers=headers,
-                json=request_body
-            )
-            
-            if response.status_code != 200:
-                print(f"Error: API request failed with status code {response.status_code}")
-                print(f"Response: {response.text}")
-                return {"error": "Failed to get response from Gemini API", "details": response.text}
-            
             data = response.json()
             raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
             
@@ -265,7 +314,7 @@ Consider these key aspects for accurate location identification:
                 }
         except Exception as e:
             return {
-                "error": "Failed to communicate with Gemini API",
+                "error": "Failed to process API response",
                 "exception": str(e)
             }
             

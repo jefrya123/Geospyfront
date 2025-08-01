@@ -472,7 +472,51 @@ def main():
                         st.session_state.analysis_time = datetime.now()
                         
                     except Exception as e:
-                        st.error(f"❌ Error analyzing image: {str(e)}")
+                        error_msg = str(e)
+                        
+                        # Handle specific API errors
+                        if "503" in error_msg or "overloaded" in error_msg.lower() or "unavailable" in error_msg.lower():
+                            st.error("""
+                            🔄 **API Temporarily Overloaded**
+                            
+                            The Gemini API is experiencing high traffic right now. This is a temporary issue.
+                            
+                            **Solutions:**
+                            - ⏱️ **Wait 1-2 minutes** and try again
+                            - 🔄 **Refresh the page** and retry
+                            - 🌙 **Try during off-peak hours** (late night/early morning)
+                            
+                            This is not a problem with your setup - it's a server-side issue.
+                            """)
+                        elif "quota" in error_msg.lower() or "limit" in error_msg.lower():
+                            st.error("""
+                            📊 **API Quota Exceeded**
+                            
+                            You've reached your Gemini API usage limit.
+                            
+                            **Solutions:**
+                            - 💳 **Check your API quota** at [Google AI Studio](https://makersuite.google.com/app/apikey)
+                            - 🔄 **Wait for quota reset** (usually daily)
+                            - 📈 **Upgrade your plan** if needed
+                            """)
+                        elif "invalid" in error_msg.lower() and "key" in error_msg.lower():
+                            st.error("""
+                            🔑 **Invalid API Key**
+                            
+                            The API key you provided is not valid.
+                            
+                            **Solutions:**
+                            - 🔑 **Check your API key** at [Google AI Studio](https://makersuite.google.com/app/apikey)
+                            - 📋 **Copy the key carefully** (no extra spaces)
+                            - 🔄 **Generate a new key** if needed
+                            """)
+                        else:
+                            st.error(f"❌ **Analysis Error:** {error_msg}")
+                        
+                        # Show technical details in expander
+                        with st.expander("🔧 Technical Details"):
+                            st.code(f"Error: {error_msg}")
+                            st.info("If this error persists, please check your internet connection and API key.")
     
     with col2:
         st.markdown('<h2 class="section-header">📍 Results</h2>', unsafe_allow_html=True)
