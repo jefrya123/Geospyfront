@@ -66,6 +66,76 @@ st.markdown("""
         background-color: #1f1f1f !important;
     }
     
+    /* Sidebar text and elements */
+    .css-1d391kg .stMarkdown,
+    .css-1d391kg .stText,
+    .css-1d391kg .stTextInput,
+    .css-1d391kg .stTextArea,
+    .css-1d391kg .stSelectbox,
+    .css-1d391kg label,
+    .css-1d391kg p,
+    .css-1d391kg h1,
+    .css-1d391kg h2,
+    .css-1d391kg h3,
+    .css-1d391kg h4,
+    .css-1d391kg h5,
+    .css-1d391kg h6,
+    .css-1d391kg div {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar input fields */
+    .css-1d391kg .stTextInput > div > div > input,
+    .css-1d391kg .stTextArea > div > div > textarea {
+        color: #fafafa !important;
+        background-color: #262730 !important;
+        border-color: #4a4a4a !important;
+    }
+    
+    /* Sidebar labels and help text */
+    .css-1d391kg .stMarkdown p {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar section headers */
+    .css-1d391kg .stMarkdown h1,
+    .css-1d391kg .stMarkdown h2,
+    .css-1d391kg .stMarkdown h3 {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar list items */
+    .css-1d391kg ul,
+    .css-1d391kg ol,
+    .css-1d391kg li {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar help icons and tooltips */
+    .css-1d391kg .stTooltip,
+    .css-1d391kg .stHelp {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar button styling */
+    .css-1d391kg .stButton > button {
+        color: #fafafa !important;
+        background-color: #1f77b4 !important;
+        border-color: #1f77b4 !important;
+    }
+    
+    /* Sidebar checkbox and radio buttons */
+    .css-1d391kg .stCheckbox,
+    .css-1d391kg .stRadio {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar expander/collapsible sections */
+    .css-1d391kg .streamlit-expanderHeader {
+        color: #fafafa !important;
+        background-color: #262730 !important;
+    }
+    
     /* Reduce excessive padding and margins */
     .main .block-container {
         padding-top: 1rem !important;
