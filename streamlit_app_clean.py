@@ -562,25 +562,19 @@ def create_ranking_comparison(locations):
     return df
 
 def display_location_ranking(locations):
-    """Display locations in a ranking format"""
+    """Display top 3 locations in a ranking format without confidence levels"""
     if not locations:
         return
     
-    st.markdown('<h3 class="section-header">🏆 Location Rankings</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 class="section-header">🏆 Top 3 Location Predictions</h3>', unsafe_allow_html=True)
     
-    for i, location in enumerate(locations):
+    # Only show top 3 locations
+    top_locations = locations[:3]
+    
+    for i, location in enumerate(top_locations):
         rank = i + 1
-        confidence = location.get("confidence", "Medium")
         
-        # Determine confidence styling
-        if confidence == "High":
-            conf_class = "confidence-high"
-        elif confidence == "Medium":
-            conf_class = "confidence-medium"
-        else:
-            conf_class = "confidence-low"
-        
-        # Create ranking card
+        # Create ranking card without confidence
         st.markdown(f"""
         <div class="ranking-card">
             <div class="location-header">
@@ -591,10 +585,9 @@ def display_location_ranking(locations):
                 </div>
             </div>
             <div style="margin-left: 3.5rem;">
-                <p><strong>🎯 Confidence:</strong> <span class="{conf_class}">{confidence}</span></p>
                 <p><strong>📍 Coordinates:</strong> {location.get('coordinates', {}).get('latitude', 0):.6f}, {location.get('coordinates', {}).get('longitude', 0):.6f}</p>
                 <details>
-                    <summary><strong>💡 Reasoning</strong></summary>
+                    <summary><strong>💡 AI Reasoning</strong></summary>
                     <p style="margin-top: 0.5rem; color: #666;">{location.get('explanation', 'No explanation provided')}</p>
                 </details>
             </div>
@@ -604,7 +597,7 @@ def display_location_ranking(locations):
 def main():
     # Header
     st.markdown('<h1 class="main-header">🌍 GeoSpy</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with **3-5 Ranked Location Predictions**</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with **Top 3 Location Predictions**</p>', unsafe_allow_html=True)
     
     # Sidebar for configuration
     with st.sidebar:
@@ -656,15 +649,15 @@ def main():
         - 🏛️ Architectural analysis
         - 🌿 Environmental indicators  
         - 🚗 Cultural context
-        - 📍 **3-5 location predictions**
+        - 📍 **Top 3 location predictions**
         - 🗺️ Interactive maps
-        - 📊 Confidence analytics
-        - 🏆 **Location rankings (Gold/Silver/Bronze)**
+        - 📊 AI reasoning analysis
+        - 🏆 **Ranked predictions (1st, 2nd, 3rd)**
         
         **How it works:**
         1. Upload an image
         2. AI analyzes visual elements
-        3. Get **top 3-5 location predictions** with confidence levels
+        3. Get **top 3 location predictions** with AI reasoning
         """)
     
     # Main content area
