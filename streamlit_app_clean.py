@@ -190,6 +190,48 @@ st.markdown("""
         color: #fafafa !important;
     }
     
+    /* Main content area text readability */
+    .main .stMarkdown,
+    .main .stMarkdown *,
+    .main .stText,
+    .main .stText *,
+    .main p,
+    .main h1,
+    .main h2,
+    .main h3,
+    .main h4,
+    .main h5,
+    .main h6,
+    .main span,
+    .main div {
+        color: #fafafa !important;
+    }
+    
+    /* Location ranking cards styling */
+    .ranking-card,
+    .ranking-card *,
+    .ranking-card p,
+    .ranking-card h1,
+    .ranking-card h2,
+    .ranking-card h3,
+    .ranking-card h4,
+    .ranking-card h5,
+    .ranking-card h6,
+    .ranking-card span,
+    .ranking-card div {
+        color: #fafafa !important;
+    }
+    
+    /* Ensure all text in main content is readable */
+    .main .stMarkdown p,
+    .main .stMarkdown li,
+    .main .stMarkdown span,
+    .main .stText p,
+    .main .stText li,
+    .main .stText span {
+        color: #fafafa !important;
+    }
+    
     /* Reduce excessive padding and margins */
     .main .block-container {
         padding-top: 1rem !important;
@@ -297,6 +339,12 @@ st.markdown("""
         border-radius: 12px;
         padding: 1.5rem;
         margin: 1rem 0;
+        color: #fafafa !important;
+    }
+    
+    .ranking-card * {
+        color: #fafafa !important;
+    }
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         color: #333 !important;
