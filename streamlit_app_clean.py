@@ -136,6 +136,60 @@ st.markdown("""
         background-color: #262730 !important;
     }
     
+    /* Force all sidebar text to be light */
+    [data-testid="stSidebar"] * {
+        color: #fafafa !important;
+    }
+    
+    /* Specific targeting for sidebar markdown content */
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] .stMarkdown *,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] li,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] div {
+        color: #fafafa !important;
+    }
+    
+    /* Override any dark text colors in sidebar */
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] .stMarkdown li,
+    [data-testid="stSidebar"] .stMarkdown span {
+        color: #fafafa !important;
+    }
+    
+    /* Ensure sidebar headers are visible */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] h4,
+    [data-testid="stSidebar"] h5,
+    [data-testid="stSidebar"] h6 {
+        color: #fafafa !important;
+    }
+    
+    /* Sidebar background and container styling */
+    [data-testid="stSidebar"] {
+        background-color: #1f1f1f !important;
+    }
+    
+    [data-testid="stSidebar"] .css-1d391kg {
+        background-color: #1f1f1f !important;
+    }
+    
+    /* Override any inline styles that might be causing dark text */
+    [data-testid="stSidebar"] *[style*="color"] {
+        color: #fafafa !important;
+    }
+    
+    /* Force light text for any remaining dark elements */
+    [data-testid="stSidebar"] .stMarkdown,
+    [data-testid="stSidebar"] .stMarkdown *,
+    [data-testid="stSidebar"] .stText,
+    [data-testid="stSidebar"] .stText * {
+        color: #fafafa !important;
+    }
+    
     /* Reduce excessive padding and margins */
     .main .block-container {
         padding-top: 1rem !important;
