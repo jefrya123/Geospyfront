@@ -6,14 +6,14 @@
 
 > **Note**: This is an enhanced version of the original [GeoSpy](https://github.com/atiilla/geospy) project by [Atilla](https://github.com/atiilla), featuring a professional Streamlit web interface, Docker containerization, and improved user experience.
 
-**GeoSpy** is an advanced AI-powered image geolocation tool that analyzes photographs to identify their geographical location. Using Google's Gemini AI, it examines architectural styles, environmental indicators, cultural context, and visual landmarks to provide multiple location predictions with confidence levels.
+**GeoSpy** is an advanced AI-powered image geolocation tool that analyzes photographs to identify their geographical location. Using Google's Gemini AI, it examines architectural styles, environmental indicators, cultural context, and visual landmarks to provide **3-5 ranked location predictions** with confidence levels.
 
 ## ✨ Features
 
 - 🏛️ **Architectural Analysis** - Identifies building styles, materials, and design patterns
 - 🌿 **Environmental Indicators** - Analyzes vegetation, climate, and natural features
 - 🚗 **Cultural Context** - Recognizes signs, vehicles, and cultural elements
-- 📍 **Multiple Predictions** - Provides 3-5 ranked location options with confidence levels
+- 📍 **Multiple Predictions** - Provides **3-5 ranked location options** with confidence levels
 - 🗺️ **Interactive Maps** - Visualizes predictions with satellite and street views
 - 📊 **Confidence Analytics** - Detailed confidence scoring and feature analysis
 - 🏆 **Location Rankings** - Gold, silver, bronze ranking system for predictions
@@ -115,9 +115,10 @@ streamlit run streamlit_app_clean.py
    - Environmental indicators (vegetation, climate)
    - Cultural context (signs, vehicles, people)
    - Landmarks and distinctive features
-3. **Location Prediction**: AI generates 3-5 possible locations with confidence levels
-4. **Visualization**: Results displayed on interactive maps with analytics
-5. **Ranking**: Locations ranked by confidence (gold, silver, bronze)
+3. **Location Prediction**: AI generates **3-5 possible locations** with confidence levels
+4. **Ranking System**: Locations ranked by confidence (🥇 Gold, 🥈 Silver, 🥉 Bronze)
+5. **Visualization**: Results displayed on interactive maps with analytics
+6. **Detailed Analysis**: Each location includes coordinates, reasoning, and confidence scores
 
 ## ⚙️ Configuration
 
@@ -233,13 +234,13 @@ docker-compose up --build
 ### 3. **Analyze Location**
    - Click "Analyze Location" button
    - Wait 5-15 seconds for AI processing
-   - View multiple location predictions
+   - View **3-5 ranked location predictions**
 
 ### 4. **Explore Results**
-   - Review ranked location predictions
-   - Examine confidence levels and reasoning
-   - Explore interactive maps
-   - View analytics and comparisons
+   - Review **ranked location predictions** (🥇 Gold, 🥈 Silver, 🥉 Bronze)
+   - Examine confidence levels and detailed reasoning
+   - Explore interactive maps with multiple markers
+   - View analytics and location comparison table
 
 ## 🤝 Contributing
 

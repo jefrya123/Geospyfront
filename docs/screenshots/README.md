@@ -37,25 +37,31 @@ This directory contains screenshots for the GeoSpy README. Please take high-qual
 - **Key Elements**:
   - Uploaded image display (geotest1.jpg example)
   - AI analysis text with detailed interpretation
-  - Metric cards showing locations found, confidence levels, and coordinates
+  - Metric cards showing **3-5 locations found**, confidence levels, and coordinates
   - Professional gradient styling for metrics
   - File upload confirmation with size and format info
 
 ### 5. `map-analytics.png`
 - **Size**: 1920x1080 or higher
-- **Content**: Interactive map with location markers and analytics dashboard
-- **Focus**: Show both map functionality and confidence analytics
+- **Content**: Interactive map with **multiple location markers** and analytics dashboard
+- **Focus**: Show both map functionality and confidence analytics with **ranking system**
 - **Key Elements**:
-  - Map centered on detected location (Wilson, NC)
-  - Green confidence marker with checkmark
-  - Map controls (zoom, layer toggle)
+  - Map with **multiple location markers** (Gold/Silver/Bronze rankings)
+  - **3-5 location predictions** with different confidence levels
+  - Map controls (zoom, layer toggle, satellite view)
   - Confidence distribution bar chart
   - Professional styling and layout
 
 ### 6. `location-details.png`
 - **Size**: 1920x1080 or higher
-- **Content**: Expanded location details with coordinates and reasoning
-- **Focus**: Show detailed location information and Google Maps link
+- **Content**: **Ranked location details** with coordinates and reasoning
+- **Focus**: Show **multiple location predictions** with ranking cards and detailed information
+- **Key Elements**:
+  - **Gold/Silver/Bronze ranking cards**
+  - **3-5 location predictions** with confidence badges
+  - Coordinates and Google Maps links for each location
+  - Expandable reasoning sections
+  - Location comparison table
 
 ## 📸 Screenshot Guidelines
 

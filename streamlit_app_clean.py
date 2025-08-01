@@ -400,7 +400,7 @@ def display_location_ranking(locations):
 def main():
     # Header
     st.markdown('<h1 class="main-header">🌍 GeoSpy</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with Multiple Location Predictions</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">AI-Powered Image Geolocation with **3-5 Ranked Location Predictions**</p>', unsafe_allow_html=True)
     
     # Sidebar for configuration
     with st.sidebar:
@@ -452,15 +452,15 @@ def main():
         - 🏛️ Architectural analysis
         - 🌿 Environmental indicators  
         - 🚗 Cultural context
-        - 📍 Multiple location predictions
+        - 📍 **3-5 location predictions**
         - 🗺️ Interactive maps
         - 📊 Confidence analytics
-        - 🏆 Location rankings
+        - 🏆 **Location rankings (Gold/Silver/Bronze)**
         
         **How it works:**
         1. Upload an image
         2. AI analyzes visual elements
-        3. Get top 3-5 location predictions with confidence levels
+        3. Get **top 3-5 location predictions** with confidence levels
         """)
     
     # Main content area
