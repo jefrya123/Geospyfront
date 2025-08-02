@@ -68,25 +68,73 @@ streamlit run streamlit_app_clean.py
 
 > **⚠️ Security Note**: Each user needs their own API key. The API key is stored securely in your browser session and is never saved to disk or shared.
 
-## 📸 Screenshots
+## 📸 User Journey - See GeoSpy in Action
 
+Follow this visual story to see how GeoSpy transforms any image into precise location predictions:
+
+### 🚀 **Step 1: Getting Started**
 <div align="center">
-  <img src="docs/screenshots/main-interface.png" alt="Main Interface - Dark themed interface with sidebar configuration and image upload area" width="400"/>
-  <img src="docs/screenshots/location-details.png" alt="Location Details - Top 3 ranked predictions with AI reasoning" width="400"/>
-  <img src="docs/screenshots/results-analysis.png" alt="Results Analysis - Analytics dashboard with comparison table" width="400"/>
-  <img src="docs/screenshots/map-analytics.png" alt="Interactive Map - Satellite view with location markers and radial gradients" width="400"/>
-  <img src="docs/screenshots/confidence-chart.png" alt="Confidence Distribution - Bar chart showing prediction confidence levels" width="400"/>
-  <img src="docs/screenshots/api-overload-error.png" alt="Error Handling - Graceful API overload error with retry guidance" width="400"/>
+  <img src="docs/screenshots/docker-setup.png" alt="Docker Setup - Easy containerized deployment with clear startup instructions" width="400"/>
+  <img src="docs/screenshots/api-key-setup.png" alt="API Key Setup - Secure sidebar interface for entering your Gemini API key" width="400"/>
 </div>
 
-### Key Features Shown:
-- **Main Interface**: Professional dark theme with sidebar configuration and main content area
-- **Location Analysis**: Top 3 ranked predictions with AI reasoning instead of confidence levels
-- **Analytics Dashboard**: Detailed comparison table with coordinates and confidence distribution
-- **Interactive Map**: Satellite view with location markers and radial confidence gradients
-- **Confidence Chart**: Visual distribution of prediction confidence levels
-- **Error Handling**: Graceful handling of API overload with helpful retry guidance
-- **Real Results**: Example analysis showing top 3 location predictions
+**What you see:** Simple Docker deployment and secure API key entry in the sidebar configuration panel.
+
+---
+
+### 📸 **Step 2: Upload & Analyze**
+<div align="center">
+  <img src="docs/screenshots/main-interface.png" alt="Main Interface - Professional dark theme with image upload area and sidebar configuration" width="400"/>
+</div>
+
+**What you see:** Clean, professional interface where you can upload images or provide URLs for analysis.
+
+---
+
+### 🏆 **Step 3: Top 3 Predictions**
+<div align="center">
+  <img src="docs/screenshots/location-details.png" alt="Location Results - Top 3 ranked predictions with detailed AI reasoning for each location" width="400"/>
+</div>
+
+**What you see:** AI-powered analysis showing the top 3 most likely locations with detailed reasoning for each prediction.
+
+---
+
+### 📊 **Step 4: Analytics Dashboard**
+<div align="center">
+  <img src="docs/screenshots/results-analysis.png" alt="Analytics Dashboard - Comprehensive comparison table with coordinates and confidence metrics" width="400"/>
+  <img src="docs/screenshots/confidence-chart.png" alt="Confidence Chart - Visual distribution of prediction confidence levels across all locations" width="400"/>
+</div>
+
+**What you see:** Detailed analytics showing location comparisons, coordinates, and confidence distribution charts.
+
+---
+
+### 🗺️ **Step 5: Interactive Maps**
+<div align="center">
+  <img src="docs/screenshots/map-analytics.png" alt="Interactive Map - Satellite view with location markers showing predicted locations with radial confidence gradients" width="400"/>
+</div>
+
+**What you see:** Interactive satellite map with markers for each predicted location, allowing you to explore the areas visually.
+
+---
+
+### ⚠️ **Step 6: Error Handling**
+<div align="center">
+  <img src="docs/screenshots/api-overload-error.png" alt="Error Handling - Graceful API overload error with helpful retry guidance and user-friendly messaging" width="400"/>
+</div>
+
+**What you see:** Professional error handling when the API is overloaded, with clear guidance on what to do next.
+
+---
+
+### 🎯 **The Complete Experience:**
+- **Easy Setup**: Docker deployment with secure API key entry
+- **Simple Upload**: Drag-and-drop or URL-based image upload
+- **AI Analysis**: Advanced image analysis with top 3 location predictions
+- **Rich Results**: Detailed reasoning, coordinates, and confidence metrics
+- **Visual Exploration**: Interactive maps and analytics dashboards
+- **Professional UX**: Dark theme with responsive design and error handling
 
 ## 🏗️ Architecture
 
@@ -113,16 +161,40 @@ streamlit run streamlit_app_clean.py
 
 ## 🔍 How It Works
 
-1. **Image Upload**: Users upload images or provide URLs
-2. **AI Analysis**: Gemini AI analyzes visual elements:
-   - Architectural features and building styles
-   - Environmental indicators (vegetation, climate)
-   - Cultural context (signs, vehicles, people)
-   - Landmarks and distinctive features
-3. **Location Prediction**: AI generates **3-5 possible locations** with confidence levels
-4. **Ranking System**: Locations ranked by confidence (🥇 Gold, 🥈 Silver, 🥉 Bronze)
-5. **Visualization**: Results displayed on interactive maps with analytics
-6. **Detailed Analysis**: Each location includes coordinates, reasoning, and confidence scores
+Follow this step-by-step process to see how GeoSpy analyzes your images:
+
+### **Step 1: Setup & Configuration**
+- **Deploy the application** using Docker or local installation
+- **Enter your API key** securely in the sidebar configuration panel
+- **Prepare your image** (PNG, JPG, JPEG, GIF, BMP up to 20MB)
+
+### **Step 2: Image Analysis**
+- **Upload your image** via drag-and-drop or provide a direct URL
+- **AI Processing**: Gemini AI analyzes visual elements:
+  - 🏛️ **Architectural features** and building styles
+  - 🌿 **Environmental indicators** (vegetation, climate, terrain)
+  - 🚗 **Cultural context** (signs, vehicles, people, language)
+  - 🗺️ **Landmarks** and distinctive features
+  - 🏙️ **Urban patterns** and city layouts
+
+### **Step 3: Location Prediction**
+- **AI generates top 3 location predictions** with detailed reasoning
+- **Each prediction includes**:
+  - 📍 Precise coordinates (latitude/longitude)
+  - 🏙️ City, state, and country information
+  - 💡 Detailed AI reasoning for the prediction
+  - 📊 Confidence metrics and analysis
+
+### **Step 4: Results Visualization**
+- **Interactive maps** with satellite view and location markers
+- **Analytics dashboard** with comparison tables and charts
+- **Detailed reasoning** for each prediction
+- **Export capabilities** for further analysis
+
+### **Step 5: Error Handling**
+- **Graceful API overload handling** with retry guidance
+- **User-friendly error messages** with clear solutions
+- **Rate limit management** and best practices
 
 ## ⚙️ Configuration
 
