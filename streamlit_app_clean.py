@@ -254,19 +254,44 @@ st.markdown("""
     
     /* Reduce excessive padding and margins */
     .main .block-container {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
         max-width: 1200px !important;
     }
     
     /* Compact spacing */
     .stMarkdown {
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.25rem !important;
     }
     
     /* Reduce blank space */
     .stButton > button {
-        margin: 0.5rem 0 !important;
+        margin: 0.25rem 0 !important;
+    }
+    
+    /* Reduce section header spacing */
+    .section-header {
+        margin: 0.5rem 0 0.25rem 0 !important;
+    }
+    
+    /* Reduce expander spacing */
+    .streamlit-expanderHeader {
+        margin-bottom: 0.25rem !important;
+    }
+    
+    /* Reduce dataframe spacing */
+    .stDataFrame {
+        margin: 0.25rem 0 !important;
+    }
+    
+    /* Reduce plotly chart spacing */
+    .stPlotlyChart {
+        margin: 0.25rem 0 !important;
+    }
+    
+    /* Reduce folium map spacing */
+    .stFolium {
+        margin: 0.25rem 0 !important;
     }
     
     .main-header {
@@ -283,12 +308,12 @@ st.markdown("""
         text-align: center;
         font-size: 1.1rem;
         color: #b0b0b0 !important;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
     .metric-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white !important;
-        padding: 1.5rem;
+        padding: 1rem;
         border-radius: 12px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -328,7 +353,7 @@ st.markdown("""
     .upload-area {
         border: 2px dashed #4a4a4a;
         border-radius: 10px;
-        padding: 2rem;
+        padding: 1rem;
         text-align: center;
         background: #262730;
         transition: all 0.3s ease;
@@ -342,23 +367,23 @@ st.markdown("""
     .section-header {
         font-size: 1.5rem;
         font-weight: bold;
-        margin: 1.5rem 0 1rem 0;
+        margin: 0.5rem 0 0.25rem 0;
         color: #fafafa !important;
     }
     .info-box {
         background: #1a1a2e;
         border-left: 4px solid #1f77b4;
-        padding: 1rem;
+        padding: 0.75rem;
         border-radius: 4px;
-        margin: 1rem 0;
+        margin: 0.5rem 0;
         color: #fafafa !important;
     }
     .ranking-card {
         background: #262730;
         border: 2px solid #4a4a4a;
         border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
+        padding: 1rem;
+        margin: 0.5rem 0;
         color: #fafafa !important;
     }
     
@@ -392,7 +417,7 @@ st.markdown("""
     .location-header {
         display: flex;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
     .location-title {
         font-size: 1.3rem;
